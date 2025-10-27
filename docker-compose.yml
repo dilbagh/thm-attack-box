@@ -1,0 +1,12 @@
+services:
+  thm-attack-box:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    volumes:
+      - ./config:/config:ro
+    entrypoint: ["openvpn", "--config", "/config/vpn-config.ovpn"]
